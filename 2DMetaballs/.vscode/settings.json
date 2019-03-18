@@ -1,0 +1,8 @@
+{
+    "glsl-canvas.uniforms": {
+        "u_strength": 1.0
+    },
+    "glsl-canvas.textures": {
+        "0" : "./RGBperlinTexture.png" 
+    }
+}
