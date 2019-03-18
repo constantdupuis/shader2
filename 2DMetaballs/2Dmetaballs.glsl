@@ -34,14 +34,18 @@ void main() {
         vec2 n = N22(vec2(i));
         vec2 p  = sin(n*t);
 
+        n = (n+vec2(1.0))/8.0;
+
         float d = length(uv-p);
-        m += smoothstep(0.2, 0.001, d);
+        m += smoothstep(n.x, 0.001, d);
     }
 
-    //m = smoothstep(0.8,0.81, m);
-    m = sin(m*15.);
-
-
+    m = smoothstep(0.4,0.41, m);
+    
+    //m = sin(m*15.);
+    
+    vec3 c = hue2rgb( m );
+    //vec3 col = c * m;
 
     vec3 col = vec3(m);
     gl_FragColor = vec4(col, 1.0);
