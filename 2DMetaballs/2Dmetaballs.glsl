@@ -27,7 +27,7 @@ void main() {
     // gl_FragColor = vec4(vec3(colorT.r,colorT.g, colorT.b ), 1.0);
 
     float m = 0.0;
-    float t = u_time/2.0;
+    float t = 100.+u_time/4.0;
 
     for( int i =0; i < 20; i++)
     {
@@ -38,14 +38,16 @@ void main() {
 
         float d = length(uv-p);
         //m += smoothstep(n.x, 0.001, d);
-        m += smoothstep(0.3, 0.001, d);
+        // first param shoudl be a parameter or vary over time
+        m += smoothstep(0.6, 0.001, d);
     }
     //m = clamp(m, 0.0, 1.0);
 
     //m = smoothstep(0.4,0.41, m);
     
-    m = sin(m*2.0);
-    m = (m+1.0)*0.5;
+    // multiplier should be a param or vary over time
+    m = sin(m*8.0); // from -1 to 1
+    m = (m+1.0)*0.5; // back from 0 to 1
     
     //vec4 finalColor = vec4(vec3(m), 1.0);
 
