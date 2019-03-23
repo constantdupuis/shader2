@@ -4,6 +4,9 @@ uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
 uniform sampler2D u_texture_0; 
+uniform sampler2D u_texture_1;
+uniform float u_strength;
+uniform float u_strength2;
 
 vec2 N22( vec2 p)
 {
@@ -23,11 +26,15 @@ void main() {
     vec2 tuv = gl_FragCoord.xy/u_resolution.xy;
     vec2 uv = (2.*gl_FragCoord.xy-u_resolution.xy)/u_resolution.y;
 
-    // vec4 colorT = texture2D(u_texture_0, uv);
+    vec4 disp = texture2D(u_texture_1, tuv);
+    vec4 dispb =  disp -  0.5;
     // gl_FragColor = vec4(vec3(colorT.r,colorT.g, colorT.b ), 1.0);
+    //uv += dispb.bg*u_strength;
+    uv += dispb.bg*(sin(u_time*(10.*u_strength))/10.);
 
+    //uv += disp.xy*(16.*u_strength);
     float m = 0.0;
-    float t = 100.+u_time/4.0;
+    float t = 100.+u_time/(8.0*u_strength2);
 
     for( int i =0; i < 20; i++)
     {
@@ -38,20 +45,19 @@ void main() {
 
         float d = length(uv-p);
         //m += smoothstep(n.x, 0.001, d);
-        // first param shoudl be a parameter or vary over time
         m += smoothstep(0.6, 0.001, d);
     }
     //m = clamp(m, 0.0, 1.0);
 
     //m = smoothstep(0.4,0.41, m);
     
-    // multiplier should be a param or vary over time
-    m = sin(m*8.0); // from -1 to 1
-    m = (m+1.0)*0.5; // back from 0 to 1
+    m = sin(m*6.0);
+    m = (m+1.0)*0.5;
     
     //vec4 finalColor = vec4(vec3(m), 1.0);
 
     vec4 colorT = texture2D(u_texture_0, vec2(m, 10.));
+    colorT.rgb *= disp.bbb;
     vec4 finalColor = vec4( colorT.r, colorT.g, colorT.b, 1.0 );
 
     gl_FragColor = finalColor;
