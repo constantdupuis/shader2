@@ -30,11 +30,11 @@ void main() {
     vec4 dispb =  disp -  0.5;
     // gl_FragColor = vec4(vec3(colorT.r,colorT.g, colorT.b ), 1.0);
     //uv += dispb.bg*u_strength;
-    uv += dispb.bg*(sin(u_time*(10.*u_strength))/10.);
+    uv += dispb.bg*(sin(u_time*(20.*u_strength))/5.);
 
     //uv += disp.xy*(16.*u_strength);
     float m = 0.0;
-    float t = 100.+u_time/(8.0*u_strength2);
+    float t = 100.+u_time/(20.0*u_strength2);
 
     for( int i =0; i < 20; i++)
     {
@@ -57,7 +57,7 @@ void main() {
     //vec4 finalColor = vec4(vec3(m), 1.0);
 
     vec4 colorT = texture2D(u_texture_0, vec2(m, 10.));
-    colorT.rgb *= disp.bbb;
+    //colorT.rgb *= disp.bbb;
     vec4 finalColor = vec4( colorT.r, colorT.g, colorT.b, 1.0 );
 
     gl_FragColor = finalColor;
