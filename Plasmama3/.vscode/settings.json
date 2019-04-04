@@ -1,0 +1,6 @@
+{
+    "glsl-canvas.textures": {
+        "0" : "./textureWithTransparency.png",
+        "1" : "./palette02.png"
+    }
+}
