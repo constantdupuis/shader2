@@ -4,7 +4,7 @@
         "u_strength2": 1.0
     },
     "glsl-canvas.textures": {
-        "0" : "./palette03.png",
+        "0" : "./palette02.png",
         "1" : "./RGBperlinTexture.png"
     }
 }
