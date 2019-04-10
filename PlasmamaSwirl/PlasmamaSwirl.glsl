@@ -1,5 +1,9 @@
 precision mediump float;
 
+uniform sampler2D u_buffer0
+
+#if defined(BUFFER_0)
+
 uniform vec2 u_resolution;
 uniform vec2 u_mouse;
 uniform float u_time;
@@ -13,12 +17,6 @@ vec2 N22( vec2 p)
     vec3 a = fract(p.xyx*vec3(123.34, 234.34, 345.65));
     a += dot(a,a+34.45); 
     return fract(vec2(a.x*a.y, a.y*a.z));
-}
-
-vec3 hue2rgb(float hue) {
-    return clamp( 
-        abs(mod(hue * 6.0 + vec3(0.0, 4.0, 2.0), 6.0) - 3.0) - 1.0, 
-        0.0, 1.0);
 }
 
 void main() {
@@ -42,7 +40,7 @@ void main() {
         vec2 p  = sin(n*t);
 
         //n = (n+vec2(1.0))/2.0;
-
+        float fi = float(i)/10.0; 
         float d = length(uv-p);
         
         //m += smoothstep(n.x, 0.001, d);
@@ -62,7 +60,26 @@ void main() {
     vec4 finalColor = vec4( colorT.r, colorT.g, colorT.b, 1.0 );
 
     //vec4 finalColor = vec4( m, m, m, 1.0 );
+    vec2 pr = N22(vec2(0.5));
+    t *=10.0;
+    vec2 np  = sin(pr*t);
+    float nd = length(uv-np);
+    nd = smoothstep(0.2,0.19,nd);
 
+    vec4 colorT2 = texture2D(u_texture_0, vec2(nd, 10.));
+
+    finalColor = mix( finalColor, colorT2, nd);
 
     gl_FragColor = finalColor;
 }
+
+#else
+
+void main()
+{
+    
+    vec3 color = texture2D(u_buffer0, uv).rgb;
+    gl_FragColor = vec4(color, 1.0);
+}
+
+#endif
