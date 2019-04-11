@@ -76,8 +76,6 @@ void main() {
     vec4 colorT3 = texture2D(u_texture_2, vec2(m3, 10.));
 
     vec4 finalColor = colorT+(colorT2*(1.0-colorT.a))+(colorT3*(1.0-colorT2.a+1.0-colorT.a));
-    //vec4 finalColor = colorT+(colorT2*(1.0-colorT.a));
-    //vec4 finalColor = vec4(uv.x, 0.0,0.0,1.0);
-
+    
     gl_FragColor = finalColor;
 }
