@@ -1,0 +1,6 @@
+{
+    "glsl-canvas.textures": {
+        "0" : "./palette01.png",
+        "1" : "./RGBperlinTexture.png"
+    }
+}
