@@ -19,23 +19,34 @@ void main() {
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
     uv -= 0.5;
     
+    // create polar coordinats
+    // s rotate around centre 0 to 1
+    // t got from center to edges 0 to 1  
     float s = (atan(uv.x, uv.y)/TWO_PI+.5);
     float t = length(uv);
 
-    s += u_time/6.+t*sin(u_time);
-    s *=8.;
+    // animate polar coodinates (pc)
+    s += u_time/16.+t*sin(u_time/2.);
+    s *= 8.;
+    t *= 6.;
 
-    t*=6.;
-
+    // make them vec2
     vec2 st = vec2(s, t);
 
-    float x = (sin(st.x*10.)+1.0)/2.0;
-    float y = cos(st.x*15.);
-
+    // create grid from pc
     vec2 q = fract(st);
 
-    vec3 color = vec3(q.x, q.y, 0.0);
-    //color = texture2D(u_texture_0, st).rgb;
+    // move cell centre, -0.5 to 0.5
+    q-= 0.5;
+
+    // calulate distance from centre of cell
+    float d = length(q-vec2(0.));
+
+    //d*=d;
+
+    vec3 color = vec3(q.x, q.y, d);
+    color = vec3(d);
+    color = texture2D(u_texture_0, vec2(d, 0.5)).rgb;
 
     gl_FragColor = vec4(color, 1.0);
 }
