@@ -17,8 +17,12 @@ uniform sampler2D u_texture_0;
 void main() {
 
     vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+    uv.x *= u_resolution.x / u_resolution.y;
     uv -= 0.5;
     
+
+    
+
     // create polar coordinats
     // s rotate around centre 0 to 1
     // t got from center to edges 0 to 1  
@@ -45,8 +49,10 @@ void main() {
     //d*=d;
 
     vec3 color = vec3(q.x, q.y, d);
-    color = vec3(d);
-    color = texture2D(u_texture_0, vec2(d, 0.5)).rgb;
+    color = vec3(d); // grey scale view of all
+
+    // map to a gradiant texture
+    //color = texture2D(u_texture_0, vec2(d, 0.5)).rgb;
 
     gl_FragColor = vec4(color, 1.0);
 }
