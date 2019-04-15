@@ -36,7 +36,7 @@ void main() {
     float m = 0.0;
     float t = 100.+u_time/(20.0);
 
-    for( int i =0; i < 10; i++)
+    for( int i =0; i < 20; i++)
     {
         vec2 n = N22(vec2(i));
         vec2 p  = sin(n*t);
@@ -52,7 +52,7 @@ void main() {
 
     //m = smoothstep(0.4,0.41, m);
     
-    m = sin(m*6.0);
+    m = sin(m*8.0*u_strength);
     m = (m+1.0)*0.5;
     
     //vec4 finalColor = vec4(vec3(m), 1.0);
