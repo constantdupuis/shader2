@@ -43,9 +43,12 @@ void main() {
     float minDist = 100.;
     float cellIndex = 0.;
 
+    float minDist2 = 100.;
+    float cellIndex2 = 0.;
+
     float numberOfCells = 50.;
 
-    vec3 coloruv;
+    vec3 coloruv, coloruv2;
 
     for( float i = 0.; i<50.; i++)
     {
@@ -65,11 +68,28 @@ void main() {
             minDist = d;
             cellIndex = i/numberOfCells;
             //coloruv =hsv2rgb(vec3(cellIndex, 0.1, 0.5))*(1.-d);
-            coloruv = vec3(d);
+            coloruv = vec3(1.0, 0.,0.) * (d*d) *5.;
+        }
+
+        vec2 n2 = N22(vec2(i+50.));
+        n.x *= ratio;
+        vec2 p2 = sin(n2*t);
+
+        float d2 = length(uv-p2);
+
+        if( d2<minDist2)
+        {
+            minDist2 = d2;
+            cellIndex2 = i/numberOfCells;
+            //coloruv =hsv2rgb(vec3(cellIndex, 0.1, 0.5))*(1.-d);
+            coloruv2 =  vec3(0.0, 0.7647, 1.0) * (d2*d2)*5. ;
         }
     }
 
-    vec4 color = vec4(coloruv, 1.0);
+    vec3 col = coloruv+coloruv2;
+    col *= col;
+    //col = smoothstep(.21, .2, col);
+    vec4 color = vec4(col, 1.0);
 
     //vec4 colorT1 = texture2D(u_texture_0, vec2(cellIndex, 0.5));
     //vec3 color = vec3(minDist);
