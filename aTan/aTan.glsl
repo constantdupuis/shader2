@@ -53,11 +53,11 @@ void main() {
     float s = (atan(uv.x, uv.y)/TWO_PI+.5);
     float t = length(uv);
 
-    float v = plot(s, fract(u_time));
-    float h = plot(t, fract(u_time));
+    float v = plot(s, fract(u_time/10.));
+    float h = plot(t, fract(u_time/10.));
 
     // animate polar coodinates (pc)
-    s += u_time/16.+t*sin(u_time/2.);
+    //s += u_time/16.+t*sin(u_time/2.);
     s *= 8.;
     t *= 6.;
 
