@@ -1,0 +1,9 @@
+{
+    "glsl-canvas.textures": {
+        "0":"./dualPalette04.png",
+        "1":"./palette03.png"
+    },
+    "glsl-canvas.uniforms": {
+        "u_mPower":0.2
+    }
+}
