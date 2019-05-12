@@ -1,0 +1,8 @@
+{
+  "glsl-canvas.textures": {
+    "0" : "./drums.jpg"
+  },
+  "glsl-canvas.uniforms": {
+    "blurIntensity" : 0.5 
+  }
+}
