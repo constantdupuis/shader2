@@ -45,8 +45,8 @@ void main() {
       //offs *= fract(sin(s+1.*a*12734.4479)*479944.8975);
       //offs = sqrt(offs);
       color += texture2D(u_texture_0, tuv+offs);
-      a+= (TWO_PI / numberSample) / tuv.y; // increment par quartier
-      //a++; // increment par unité de radian
+      //a+= (TWO_PI / numberSample) / tuv.y; // increment par quartier
+      a++; // increment par unité de radian
     }
     color /= 16.0; // 
 
